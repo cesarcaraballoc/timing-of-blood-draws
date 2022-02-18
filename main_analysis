@@ -102,6 +102,28 @@ u processed,clear
 histogram timing, xlabel( 0 "00:00" 2 "02:00" 4 "04:00" 6 "06:00" 8 "08:00" 10 "10:00" 12 "12:00" 14 "14:00" 16 "16:00" 18 "18:00" 20 "20:00" 22 "22:00") ylabel(0(2)20) percent bin(24) xmtick(##2)  xtitle("Time of blood draw") addlabel addlabopts(mlabangle(h) yvarformat(%2.1f)) 
 graph save timing_distribution.gph,replace
 
+**# morning samples distribution by categories
+
+u processed,clear
+keep if four_eight==1 
+
+* race
+mylabels 0(10)100, myscale(@/100) local(myla)
+graph bar (mean) four_five five_six six_seven seven_eight , over(race) stack ytitle("Proportion of early morning samples") ylabel(`myla') legend(order(1 "4:00 to 4:59" 2 "5:00 to 5:59" 3 "6:00 to 6:59" 4 "7:00 to 7:59") title("Timing")) blabel(bar,  position(inside) format(%4.2f))
+graph save morning_samples_by_race.gph,replace
+
+* gender
+mylabels 0(10)100, myscale(@/100) local(myla)
+graph bar (mean) four_five five_six six_seven seven_eight if gender!="Unknown", over(gender) stack ytitle("Proportion of early morning samples") ylabel(`myla') legend(order(1 "4:00 to 4:59" 2 "5:00 to 5:59" 3 "6:00 to 6:59" 4 "7:00 to 7:59") title("Timing")) blabel(bar,  position(inside) format(%4.2f))
+graph save morning_samples_by_sex.gph,replace
+
+* age
+mylabels 0(10)100, myscale(@/100) local(myla)
+graph bar (mean) four_five five_six six_seven seven_eight, over(agecat) stack ytitle("Proportion of early morning samples") ylabel(`myla') legend(order(1 "4:00 to 4:59" 2 "5:00 to 5:59" 3 "6:00 to 6:59" 4 "7:00 to 7:59") title("Timing")) blabel(bar,  position(inside) format(%4.2f))
+graph save morning_samples_by_age.gph,replace
+
+
+
 **# Figure trends
 
 u processed,clear
