@@ -2,7 +2,7 @@
 ### Caraballo C, Mahajan S, Krumholz HM, et al.
 
 ## Replication File Read Me
-In these files, we included the code used to obtain the data presented in tables and figures in the main paper and its supplemental material. We also included the dataset codebook.
+In these files, we included the code used to obtain the data presented in tables and figures in the main paper and its supplemental material.
 
 Below, we describe each of the Stata .do files. These .do files use the special bookmark comment –**#– to facilitate the inspection of its contents using Stata's Do-file Editor Navigation Control.
 
