@@ -11,6 +11,3 @@ Below, we describe each of the Stata .do files. These .do files use the special 
 
 #### main_analysis.do
 • Produces the results reported in the main text, Table, and Figure.
-
-#### supplemental_analysis.do
-• Produces the results reported in the Supplemental Material.
