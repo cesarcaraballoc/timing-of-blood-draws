@@ -1,4 +1,5 @@
 
+
 /*
 
 							CODE
@@ -63,7 +64,13 @@ format monthly %tm
 
 **# exclusions
 
-drop if monthly==718 // deleting nov 2019 
+** samples taken at other locations rather than the two main ones
+drop if location=="YNH Other Locations"
+
+
+** unwanted observations from November 2019 (outside study period)
+
+drop if monthly==718 
 
 ** samples taken outside the hospitalization
 
@@ -114,6 +121,15 @@ label var agecat "Age category"
 label define agecat 1 "18-35" 2 ">35-65" 3 ">65-85" 4 ">85"
 label value agecat agecat
 
+gen location_new=.
+replace location_new=1 if location=="YNHH"
+replace location_new=3 if location=="SRC"
+drop location
+rename location_new location
+label var location "Location"
+label define location 1 "YNHH, 20 York St" 3 "YNHH, Saint Raphael Campus"
+label value location location
+
 
 gen four_five=0
 replace four_five=1 if timing >=4 & timing < 5
@@ -129,8 +145,4 @@ replace four_seven=1 if timing >=4 & timing < 7
 
 compress
 
-save processed.dta,replace // contains all variables
-
-drop birth_date admissiondate admissiontime dischargedate dischargetime department location principaldiagnosis dischargedisposition orderdescription specimentakendttm specimentakendate specimentakentime specimentype drawtype sample_taken patient_admitted patient_discharged interval_hours sleep_hours takendate year month month_frac yearmonth
-
-save processed_for_analysis.dta,replace // contains only variables needed for the main analysis, smaller size file
+save processed.dta,replace 
